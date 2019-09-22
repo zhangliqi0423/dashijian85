@@ -18,8 +18,8 @@
     <div class="sider">
         <a href="#" class="logo"><img src="images/logo02.png" alt="logo"></a>
         <div class="user_info">
-            <img src="images/2.jpg" alt="person">
-            <span>欢迎&nbsp;&nbsp;李思思</span>
+            <img id="userimg" src="images/2.jpg" alt="person">
+            <span>欢迎&nbsp;&nbsp; <i id="userName" style="font-style:normal">李思思</i> </span>
             <b>管理员</b>
         </div>
         <div class="menu">
@@ -121,6 +121,15 @@
     <script src="./js/utils/user.js"></script>
     <script src="./js/bootstrap/js/bootstrap.min.js"></script>
     <script>
+        $(function(){
+            user.getInfo(function(res){
+                console.log(res)
+                if (res.code==200){
+                    $('#userName').text(res.data.nickname);
+                    $('#userimg').prop('src',res.data.user_pic)
+                }
+            })
+        });
     // 用户退出
     $('#btnlogout').click(function(){
         $('#myModal').modal('show');

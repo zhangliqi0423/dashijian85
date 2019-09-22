@@ -6,13 +6,19 @@ var user = {
                 password: password
             },
             function (res) {
-                res就是响应体
+                // res就是响应体
                 callback(res);
             })
     },
 
     logout:function(callback){
         $.post('http://localhost:8000/admin/logout',function(res){
+            callback(res)
+        })
+    },
+
+    getInfo:function(callback){
+        $.get('http://localhost:8000/admin/getuser',function(res){
             callback(res)
         })
     }
