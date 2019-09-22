@@ -45,7 +45,7 @@
         <div class="user_center_link">
             <a href="user.html" onclick="setMenu(3,0)" target="main_frame">个人中心</a>
             <img src="images/2.jpg" alt="person">
-            <a href="#"><i class="iconfont icon-tuichu"></i> 退出</a>
+            <a id="btnlogout" href="javascript:;"><i class="iconfont icon-tuichu"></i> 退出</a>
         </div>
     </div>
 
@@ -53,7 +53,21 @@
         <iframe src="main_count.html" frameborder="0" id="main_frame" name="main_frame" frameborder="0" scrolling="auto"></iframe>
     </div>
 
-
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">确认框</h4>
+                </div>
+                <div class="modal-body" id="result">你确定退出么？</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button id="btnDologout" type="button" class="btn btn-primary">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 
     <script>
         var $level01 = $('.level01');
@@ -103,6 +117,21 @@
            }
         }
 
+    </script>
+    <script src="./js/utils/user.js"></script>
+    <script src="./js/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+    // 用户退出
+    $('#btnlogout').click(function(){
+        $('#myModal').modal('show');
+    });
+    $('#btnDologout').click(function(){
+        user.logout(function(res){
+            if(res.code==200){
+                window.location.href='./login.html';
+            }
+        });
+    })
     </script>
 
 </body>
