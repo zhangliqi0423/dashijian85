@@ -23,13 +23,41 @@
             <form class="login_form">
                 <i class="iconfont icon-user"></i>
                 <i class="iconfont icon-key"></i>
-                <input type="text" class="input_txt" placeholder="邮箱/手机号">
-                <input type="password" class="input_pass" placeholder="密码">
-                <input type="submit" class="input_sub" value="登 录">
+                <input id="username" type="text" class="input_txt" placeholder="邮箱/手机号">
+                <input id="password" type="password" class="input_pass" placeholder="密码">
+                <!-- <input type="submit" class="input_sub" value="登 录"> -->
+                <button type="button" class="input_sub" id="btnLogin">登录</button>
             </form>
         </div>
 
     </div> 
+    <script src="./js/lib/jquery-1.12.4.min.js"></script>
+    <script>
+    // 给btn添加点击事件
+    $('#btnLogin').click(function(){
+        // 先拿到用户的信息
+        var userName = $('#username').val();
+        var password = $('#password').val();
+        // 简单判断下
+        if(username==='' ||password===''){
+            alert('证号密码不能为空');
+            return;
+        };
+        console.log(userName,password);
+        $.post(
+            'http://localhost:8000/admin/login',{
+            user_name : userName,
+            password : password
+        },function(res){
+            console.log(res);
+            if(res.code==200){
+                alert('登录成功');
+            }else{
+                alert(res.msg)
+            }
+        })
+    });
+    </script>
 
 </body>
 
